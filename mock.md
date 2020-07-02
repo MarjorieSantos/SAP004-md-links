@@ -1,22 +1,28 @@
-## PERGUNTAS FREQUENTES
+***
 
-- ** Como eu faço * especificamente * isso e aquilo? **
-    - Sem problemas! Apenas faça isso.
+## 1. Prefácio
 
----
+[Markdown](https://pt.wikipedia.org/wiki/Markdown) é uma linguagem de marcação
+muito popular entre os programadores. É usada em muitas plataformas que
+manipulam texto (GitHub, fórum, blogs e etc) e é muito comum encontrar arquivos
+com este formato em qualquer repositório (começando pelo tradicional
+`README.md`).
 
-## Apoio, suporte
+Os arquivos `Markdown` normalmente contém _links_ que podem estar
+quebrados, ou que já não são válidos, prejudicando muito o valor da
+informação que está ali.
 
-Entre em contato comigo em um dos seguintes lugares!
 
-- Website em <a href="http://fvcproductions.com" target="_blank"> `fvcproductions.com` </a>
-- Twitter em <a href="http://twitter.com/fvcproductions" target="_blank"> `@ fvcproductions` </a>
-- Insira mais links sociais aqui.
+Uma comunidade open source nos propôs criar uma ferramenta, usando
+[Node.js](https://nodejs.org/), que leia e analise arquivos no formato
+`Markdown`, para verificar os arquivos que contenham links e mostrar algumas
+estatísticas.
 
----
+![md-links](https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg)
 
-## Doações (Opcional)
+* [ ] [Teste unitário.](https://jestjs.io/docs/pt-BR/getting-started)
+* [ ] [Teste assíncrono.](https://jestjs.io/docs/pt-BR/asynchronous)
+* [ ] [Uso de bibliotecas de Mock.](https://jestjs.io/docs/pt-BR/manual-mocks)
+* [ ] Uso de Mocks manuais.
+* [ ] Teste para múltiplos Sistemas Operativos.
 
-- Você também pode incluir um link <a href="https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png" target="_blank"> Gratipay </a> .
-
-[! [Suporte via Gratipay] (https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)] (https://gratipay.com/fvcproductions/)
