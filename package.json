@@ -1,10 +1,10 @@
 {
   "name": "md-links",
   "version": "0.1.0",
-  "description": "* [1. Prefácio](#1-prefácio)\r * [2. Resumo do projeto](#2-resumo-do-projeto)\r * [3. Objetivos de aprendizagem](#3-objetivos-de-aprendizagem)\r * [4. Considerações gerais](#4-considerações-gerais)\r * [5. Critérios de aceitação mínimos do projeto](#5-criterios-de-aceitação-mínimos-do-projeto)\r * [6. Entregáveis](#6-entregáveis)\r * [7. Hacker edition](#7-hacker-edition)\r * [8. Guias, dicas e leituras complementares](#8-guias-dicas-e-leituras-complementares)\r * [9. Checklist](#9-checklist)",
+  "description": "Biblioteca para leitura de links de documentos Markdown. ",
   "main": "index.js",
   "directories": {
-    "test": "jest"
+    "test": "test"
   },
   "scripts": {
     "eslint": "eslint --ext .js test/",
@@ -12,19 +12,28 @@
     "pretest": "npm run eslint",
     "start": "nodemon index.js"
   },
+  "bin": {
+    "check": "cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MarjorieSantos/SAP004-md-links.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Marjorie Santos",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MarjorieSantos/SAP004-md-links/issues"
   },
   "homepage": "https://github.com/MarjorieSantos/SAP004-md-links#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "chalk": "^2.4.2",
+    "cli-table": "^0.3.1",
+    "commander": "^2.19.0",
+    "express": "^4.17.1",
+    "figlet": "^1.2.1",
+    "inquirer": "^6.2.2",
+    "shelljs": "^0.8.3"
   },
   "devDependencies": {
     "eslint": "^7.3.1",

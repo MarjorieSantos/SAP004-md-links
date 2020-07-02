@@ -1,14 +1,13 @@
-const mdLinks = require('express');
+#!/usr/bin/env node
+
+// mdLinks(file)
+//   .then((result) => {
+//     result.forEach((item) => {
+//       console.log(item.href, item.text);
+//     })
+//   })
+//   .catch((error) => console.log(error));
 
 
-const app = mdLinks();
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
 
-app.listen(3001);
-
-// module.exports = () => {
-//   // ...
-// };
