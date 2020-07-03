@@ -1,8 +1,4 @@
-// #!/usr/bin/env node
-
 const fs = require('fs');
-const { resolve } = require('path');
-const { rejects } = require('assert');
 const arr = [];
 
 //err - retorno de algum erro;
@@ -13,20 +9,20 @@ const arr = [];
 
 const mdLinks = (path) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(path[0], (err, data) => {
+    fs.readFile(path[0], 'utf8', (err, data) => {
       if (err) {
-        reject(console.log(err))
+        reject(err);
       } else {
         const mdString = data.toString();
-        const regex = /[^!]\[(.[^\]]*)\]\(([^]\S+)\)/gm;
+        const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
         const checkLink = mdString.match(regex);
         checkLink.forEach((links) => {
-          const href = links.match(/\(([^]\S+)\)/)[1];
-          const text = links.match(/(.[^\]]*)/)[1].replace('[', '');
-          const file = path[0].replace('[]', '')
+          const text = links.match(/\[(.[^\]]*)\]/)[1];
+          const href = links.match(/\((http.*)\)/)[1];
+          const file = path[0].replace('[]', '');
           arr.push({ href, text, file });
         })
-        resolve(console.log(arr));
+        resolve(arr);
       };
     });
   });

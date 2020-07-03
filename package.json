@@ -13,7 +13,7 @@
     "start": "nodemon index.js"
   },
   "bin": {
-    "md-links": "cli.js"
+    "md-links": "./cli.js"
   },
   "repository": {
     "type": "git",

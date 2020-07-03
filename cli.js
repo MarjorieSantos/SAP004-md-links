@@ -4,6 +4,13 @@ const mdLinks = require('./index.js');
 const [, , ...args] = process.argv;
 
 mdLinks(args)
-
+  .then((result) => {
+    result.forEach((archive) => {
+      console.log(archive.href, archive.text, archive.file);
+    })
+  })
+  .catch(() => {
+    console.log('não existem links nesse arquivo!');
+  });
 
 //https://x-team.com/blog/a-guide-to-creating-a-nodejs-command/
