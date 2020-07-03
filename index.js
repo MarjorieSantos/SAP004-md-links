@@ -15,19 +15,19 @@ const mdLinks = (path) => {
       console.log(err);
     } else {
       const mdString = data.toString();
-      const regex = /[^!]\[(.[^\]]*)\]\(([^#]\S+)\)/gm;
+      const regex = /[^!]\[(.[^\]]*)\]\(([^]\S+)\)/gm;
       const checkLink = mdString.match(regex);
       checkLink.forEach((links) => {
-        console.log(links)
-        // const href = links.match(/\(https|http.*\)/);
-        // const text = links.match(/\[(\S.*)\]/);
-        // console.log(links.href);
-        // arr.push({ links });
-        // console.log(arr)
-        //   console.log(arr);
+        const href = links.match(/\(([^]\S+)\)/)[1];
+        const text = links.match(/(.[^\]]*)/)[1].replace('[', '');
+        const file = path[0].replace('[]', '')
+        arr.push({ href, text, file });
       })
+      console.log(arr);
     }
   });
 };
+
+//=> match  : [1], para retornar a segunda(indice2) do array que estava sendo retornado, com index, input, groups, etc. pegando assim apenas o link certinho
 
 module.exports = mdLinks;
