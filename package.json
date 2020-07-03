@@ -4,7 +4,7 @@
   "description": "Biblioteca para leitura de links de documentos Markdown. ",
   "main": "index.js",
   "directories": {
-    "test": "test"
+    "test": "jest --coverage"
   },
   "scripts": {
     "eslint": "eslint --ext .js test/",
