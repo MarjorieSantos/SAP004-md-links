@@ -17,12 +17,3 @@ Uma comunidade open source nos propôs criar uma ferramenta, usando
 [Node.js](https://nodejs.org/), que leia e analise arquivos no formato
 `Markdown`, para verificar os arquivos que contenham links e mostrar algumas
 estatísticas.
-
-![md-links](https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg)
-
-* [ ] [Teste unitário.](https://jestjs.io/docs/pt-BR/getting-started)
-* [ ] [Teste assíncrono.](https://jestjs.io/docs/pt-BR/asynchronous)
-* [ ] [Uso de bibliotecas de Mock.](https://jestjs.io/docs/pt-BR/manual-mocks)
-* [ ] Uso de Mocks manuais.
-* [ ] Teste para múltiplos Sistemas Operativos.
-
