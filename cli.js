@@ -3,13 +3,15 @@
 const mdLinks = require('./index.js');
 const [, , ...args] = process.argv;
 
+
 mdLinks(args)
   .then((result) => {
     result.forEach((archive) => {
-      console.log(archive.href, archive.text, archive.file);
+      const link = `${archive.href}, ${archive.text}, ${archive.file} \n`
+      console.log(link);
     })
   })
-  .catch(() => {
+  .catch((err) => {
     console.log('não existem links nesse arquivo!');
   });
 

@@ -1,27 +1,34 @@
 const fs = require('fs');
+const path = require("path");
 const arr = [];
 
-const mdLinks = (path) => {
+const format = (data, relativePath) => {
+  const mdString = data.toString();
+  const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
+  const checkLink = mdString.match(regex);
+  checkLink.forEach((links) => {
+    const text = links.match(/\[(.[^\]]*)\]/)[1];
+    const href = links.match(/\((http.*)\)/)[1];
+    const file = path.resolve(relativePath[0].replace('[]', ''));
+    arr.push({ href, text, file });
+  });
+  return arr;
+};
+
+const readFileAt = path => {
   return new Promise((resolve, reject) => {
-    fs.readFile(path[0], 'utf8', (err, data) => {
+    const options = 'utf-8';
+    fs.readFile(path, options, (err, data) => {
       if (err) {
         reject(err);
       } else {
-        console.log(path);
-        const mdString = data.toString();
-        const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
-        const checkLink = mdString.match(regex);
-        checkLink.forEach((links) => {
-          const text = links.match(/\[(.[^\]]*)\]/)[1];
-          const href = links.match(/\((http.*)\)/)[1];
-          const file = path[0].replace('[]', '');
-          arr.push({ href, text, file });
-        })
-        resolve(arr);
-      };
+        resolve(data);
+      }
     });
   });
 };
+
+const mdLinks = path => readFileAt(path[0]).then((data) => format(data, path));
 
 module.exports = mdLinks;
 
