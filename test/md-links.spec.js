@@ -1,5 +1,6 @@
 const mdLinks = require('../index.js');
 const fs = require('fs');
+const { format } = require('path');
 
 const readFile = jest.spyOn(fs, 'readFile')
 
@@ -34,16 +35,15 @@ describe('the links are okay', () => {
       { href: 'https://thewalkingdead.com.br/', text: 'The Walking Dead' },
       { href: 'http://www.adorocinema.com/series/serie-7330/temporada-16736/', text: '1ª temporada' },
       { href: 'http://www.adorocinema.com/series/serie-7330/temporada-18736/', text: '2ª temporada' },
-
     ]);
   })
 });
 
-// readFile.mockImplementationOnce((path, options, callback) => { callback('erro qualquer') })
+readFile.mockImplementationOnce((path, options, callback) => { callback('erro qualquer') })
 
-// describe('incorrect link', () => {
-//   it('should return an error if the link is incorrect', () => {
-//     expect(mdLinks('./test/mock.md')).rejects.toEqual('Link não encontrado')
-//   });
-// });
+describe('incorrect link', () => {
+  it('should return an error if the link is incorrect', () => {
+    expect(mdLinks('./test/mock.md')).rejects.toEqual('Link não encontrado')
+  });
+});
 

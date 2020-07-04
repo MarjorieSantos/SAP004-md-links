@@ -1,5 +1,8 @@
 const fs = require('fs');
+const http = require('https');
 const path = require("path");
+const { Console } = require('console');
+const { response } = require('express');
 const arr = [];
 
 const format = (data, relativePath) => {
@@ -9,7 +12,7 @@ const format = (data, relativePath) => {
   checkLink.forEach((links) => {
     const text = links.match(/\[(.[^\]]*)\]/)[1];
     const href = links.match(/\((http.*)\)/)[1];
-    const file = path.resolve(relativePath[0].replace('[]', ''));
+    const file = path.resolve(relativePath.replace('[]', ''));
     arr.push({ href, text, file });
   });
   return arr;
@@ -28,7 +31,33 @@ const readFileAt = path => {
   });
 };
 
-const mdLinks = path => readFileAt(path[0]).then((data) => format(data, path));
+// const options = {
+//   validate:
+// };
+
+const mdLinks = ([path, option]) => {
+  // console.log(path)
+  // console.log(option)
+  return readFileAt(path).then((data) => format(data, path));
+}
+
+
+const validateHTTP = (path) => {
+  http.get(path, (resp) => {
+    let error;
+    let sucess;
+    if (resp.statusCode >= 200 && resp.statusCode <= 299) {
+      console.log(`${resp.statusMessage} ➨  ${resp.statusCode}`);
+    } else {
+      console.log(`${resp.statusMessage} ➨ ${resp.statusCode}`);
+    }
+  })
+};
+validateHTTP('https://thewalkingdead.com.br/')
+
+// console.log(validateHTTP('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY'))
+//validate == '--status'
+//stats == '--validate'
 
 module.exports = mdLinks;
 
