@@ -8,8 +8,8 @@
 
 ### Algumas das temporadas
 
-* [1ª temporada](http://www.adorocinema.com/series/serie-7330/temporada-16736/)
-* [2ª temporada](http://www.adorocinema.com/series/serie-7330/temporada-18736/)
-* [3ª temporada](http://www.adorocinema.com/series/serie-7330/temporada-20603/)
-* [4ª temporada](http://www.adorocinema.com/series/serie-7330/temporada-22184/)
-* [5ª temporada](http://www.adorocinema.com/series/serie-7330/temporada-23750/)
+* [1ª temporada](https://www.adorocinema.com/series/serie-7330/temporada-16736/)
+* [2ª temporada](https://www.adorocinema.com/series/serie-7330/temporada-18736/)
+* [3ª temporada](https://www.adorocinema.com/series/serie-7330/temporada-20603/)
+* [4ª temporada](https://www.adorocinema.com/series/serie-7330/temporada-22184/)
+* [5ª temporada](https://www.adorocinema.com/series/serie-7330/temporada-23750/)
