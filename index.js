@@ -1,20 +1,15 @@
 const fs = require('fs');
 const http = require('https');
 const path = require("path");
-const { Console } = require('console');
-const { response } = require('express');
 const arr = [];
 
-const format = (data, relativePath) => {
-  const mdString = data.toString();
-  const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
-  const checkLink = mdString.match(regex);
-  checkLink.forEach((links) => {
-    const text = links.match(/\[(.[^\]]*)\]/)[1];
-    const href = links.match(/\((http.*)\)/)[1];
+const format = (links, relativePath) => {
+  for (const link of links) {
+    const text = link.match(/\[(.[^\]]*)\]/)[1];
+    const href = link.match(/\((http.*)\)/)[1];
     const file = path.resolve(relativePath.replace('[]', ''));
     arr.push({ href, text, file });
-  });
+  };
   return arr;
 };
 
@@ -26,39 +21,54 @@ const readFileAt = path => {
         reject(err);
       } else {
         resolve(data);
-      }
+      };
     });
   });
 };
 
-// const options = {
-//   validate:
-// };
+const validateHTTP = (path) => {
+  return new Promise((resolve, reject) => {
+    http.get(path, (resp) => {
+      if (resp.statusCode >= 200 && resp.statusCode <= 399) {
+        const status = `${resp.statusMessage} ${resp.statusCode}`;
+        resolve(status);
+      } else {
+        const error = 'Invalid Link';
+        reject(error);
+      };
+    });
+  });
+};
 
 const mdLinks = ([path, option]) => {
-  // console.log(path)
-  // console.log(option)
-  return readFileAt(path).then((data) => format(data, path));
-}
+  return new Promise((resolve, reject) => {
+    readFileAt(path).then((data) => {
+      const mdString = data.toString();
+      const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
+      const links = mdString.match(regex);
 
+      const linksFormated = format(links, path);
 
-const validateHTTP = (path) => {
-  http.get(path, (resp) => {
-    let error;
-    let sucess;
-    if (resp.statusCode >= 200 && resp.statusCode <= 299) {
-      console.log(`${resp.statusMessage} ➨  ${resp.statusCode}`);
-    } else {
-      console.log(`${resp.statusMessage} ➨ ${resp.statusCode}`);
-    }
-  })
+      if (option === '--validate') {
+        const promises = [];
+        for (const link of linksFormated) {
+          promises.push(validateHTTP(link.href));
+        }
+        return Promise.all(promises).then(results => {
+          results.forEach((status, index) => {
+            linksFormated[index].stats = status;
+          });
+          return resolve(linksFormated);
+        })
+      }
+      return resolve(linksFormated);
+    });
+  });
 };
-validateHTTP('https://thewalkingdead.com.br/')
-
-// console.log(validateHTTP('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY'))
-//validate == '--status'
-//stats == '--validate'
 
 module.exports = mdLinks;
+
+//validate == '--status'
+//stats == '--validate'
 
 //=> match  : [1], para retornar a segunda(indice2) do array que estava sendo retornado, com index, input, groups, etc. pegando assim apenas o link certinho
