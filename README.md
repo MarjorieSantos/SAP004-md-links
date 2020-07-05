@@ -217,9 +217,9 @@ Por exemplo:
 
 ```sh
 $ md-links ./some/example.md
-./some/example.md http://algo.com/2/3/ Link de algo
+./some/example.md https://algo.com/2/3/ Link de algo
 ./some/example.md https://outra-coisa-.net/algum-doc.html algum doc
-./some/example.md http://google.com/ Google
+./some/example.md https://google.com/ Google
 ```
 
 O comportamento padrão não deve validar se as URLs respondem ok ou não, somente
@@ -240,9 +240,9 @@ Por exemplo:
 
 ```sh
 $ md-links ./some/example.md --validate
-./some/example.md http://algo.com/2/3/ ok 200 Link de algo
+./some/example.md https://algo.com/2/3/ ok 200 Link de algo
 ./some/example.md https://outra-coisa-.net/algum-doc.html fail 404 algum doc
-./some/example.md http://google.com/ ok 301 Google
+./some/example.md https://google.com/ ok 301 Google
 ```
 
 Vemos que o _output_ neste caso inclui a palavra `ok` e `fail` depois da URL,
@@ -334,7 +334,7 @@ criado das seguintes maneiras (todas são válidas):
 **Nós recomendamos o uso de `Regex` ou da biblioteca de `JSDOM`**
 
 Não hesite em consultar as suas companheiras, mentores e/ou o [fórum da
-comunidade](http://community.laboratoria.la/c/js) se tiver dúvidas a respeito
+comunidade](https://community.laboratoria.la/c/js) se tiver dúvidas a respeito
 destas decisões. Não existe uma única maneira certa :wink:
 
 ### Tutoriais / NodeSchool workshoppers
@@ -356,7 +356,7 @@ destas decisões. Não existe uma única maneira certa :wink:
   vantagens](https://www.opus-software.com.br/node-js/)
 * [O que é npm](https://www.hostinger.com.br/tutoriais/o-que-e-npm)
 * [Módulos, librerías, paquetes, frameworks... ¿cuál es la
-  diferencia?](http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)
+  diferencia?](https://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)
 * [JavaScript assíncrono: callbacks, promises e async
   functions](https://medium.com/@alcidesqueiroz/javascript-ass%C3%ADncrono-callbacks-promises-e-async-functions-9191b8272298)
 * [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
