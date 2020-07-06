@@ -31,6 +31,19 @@ const mdLinks = ([path, option]) => {
   });
 };
 
+
+// const mdLinks = ([path, option]) => {
+//   return new Promise((resolve, reject) => {
+//     fs.stat(path, (err, stats) => {
+//       if (stats.isDirectory()) {
+//         resolve(readDirectory(path))
+//       } else if (stats.isFile()) {
+//         resolve(readFileAt(path))
+//       } else {
+//         reject(erro)
+//       }
+//     })
+
 module.exports = mdLinks;
 
 
