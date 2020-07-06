@@ -14,4 +14,7 @@ const validateHTTPS = (path) => {
   });
 };
 
+//validate == '--status'
+//stats == '--validate'
+
 module.exports = validateHTTPS;

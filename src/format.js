@@ -12,3 +12,6 @@ const format = (links, relativePath) => {
 };
 
 module.exports = format;
+
+
+//=> match  : [1], para retornar a segunda(indice2) do array que estava sendo retornado, com index, input, groups, etc. pegando assim apenas o link certinho
