@@ -1,6 +1,6 @@
-const format = require('./format.js');
-const readFileAt = require('./readFileAt.js');
-const validateHTTPS = require('./validateHTTPS.js');
+const format = require('./src/format.js');
+const readFileAt = require('./src/readFileAt.js');
+const validateHTTPS = require('./src/validateHTTPS.js');
 
 const mdLinks = ([path, option]) => {
   return new Promise((resolve, reject) => {
