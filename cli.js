@@ -6,7 +6,7 @@ const [, , ...args] = process.argv;
 mdLinks(args)
   .then((result) => {
     result.forEach((archive) => {
-      const link = `${archive.href} ${archive.stats ? ' ➨   ' + archive.stats : ''} ➨  ${archive.text} ➨  ${archive.file} \n`
+      const link = `${archive.file} ➨  ${archive.href} ${archive.stats ? ' ➨   ' + archive.stats : ''} ➨  ${archive.text} \n`
       console.log(link);
     })
   })
