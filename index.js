@@ -1,5 +1,5 @@
 const fs = require('fs');
-const http = require('https');
+const https = require('node-fetch');
 const path = require("path");
 const arr = [];
 
@@ -26,17 +26,17 @@ const readFileAt = path => {
   });
 };
 
-const validateHTTP = (path) => {
+const validateHTTPS = (path) => {
   return new Promise((resolve, reject) => {
-    http.get(path, (resp) => {
-      if (resp.statusCode >= 200 && resp.statusCode <= 399) {
-        const status = `${resp.statusMessage} ${resp.statusCode}`;
+    https(path).then((response) => {
+      // console.log(response)
+      const statusMessage = response.statusText;
+      const statusCode = response.status;
+      if (statusCode >= 200 && statusCode <= 599) {
+        const status = `${statusMessage} ${statusCode}`;
         resolve(status);
-      } else {
-        const error = 'Invalid Link';
-        reject(error);
-      };
-    });
+      }
+    })
   });
 };
 
@@ -52,14 +52,17 @@ const mdLinks = ([path, option]) => {
       if (option === '--validate') {
         const promises = [];
         for (const link of linksFormated) {
-          promises.push(validateHTTP(link.href));
+          promises.push(validateHTTPS(link.href));
         }
         return Promise.all(promises).then(results => {
           results.forEach((status, index) => {
             linksFormated[index].stats = status;
           });
           return resolve(linksFormated);
-        })
+        }).catch(err => {
+          console.log(err)
+          reject(err)
+        });
       }
       return resolve(linksFormated);
     });
