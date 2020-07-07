@@ -1,5 +1,6 @@
 const mdLinks = require('../index.js');
 const fs = require('fs');
+const path = require("path");
 
 const readFile = jest.spyOn(fs, 'readFile')
 
@@ -10,7 +11,7 @@ const mockExample = `
 
   ## 1. Prefácio
 
-  [The Walking Dead](https://thewalkingdead.com.br/) é uma série em quadrinhos publicada nos Estados Unidos pela Image Comics desde 8 de outubro de 2003 à 3 de julho de 2019. A história foi criada e escrita por Robert Kirkman e o desenhista Tony Moore, substituído por Charlie Adlard a partir da edição número 7.
+  [The Walking Dead](https://thewalkingdead.com.br/) é uma série em quadrinhos publicada nos Estados Unidos pela Image Comics desde 8 de outubro de 2003 à 3 de julho de 2019.
 
   ### Algumas das temporadas
 
@@ -43,7 +44,7 @@ describe('the links are okay', () => {
 
 describe('incorrect link', () => {
   it('should return an error if the link is incorrect', () => {
-    return expect(mdLinks(mockExample)).rejects.toEqual('Link não encontrado')
+    expect(mdLinks(mockExample)).rejects.toEqual('Link não encontrado')
   });
 });
 

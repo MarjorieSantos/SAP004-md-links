@@ -1,16 +1,10 @@
-const format = require('./src/format.js');
+// const format = require('./src/format.js');
 const readFileAt = require('./src/readFileAt.js');
 const validateHTTPS = require('./src/validateHTTPS.js');
 
 const mdLinks = ([path, option]) => {
   return new Promise((resolve, reject) => {
-    readFileAt(path).then((data) => {
-      const mdString = data.toString();
-      const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
-      const links = mdString.match(regex);
-
-      const linksFormated = format(links, path);
-
+    readFileAt(path).then((linksFormated) => {
       if (option === '--validate') {
         const promises = [];
         for (const link of linksFormated) {
@@ -30,7 +24,6 @@ const mdLinks = ([path, option]) => {
     });
   });
 };
-
 
 // const mdLinks = ([path, option]) => {
 //   return new Promise((resolve, reject) => {
