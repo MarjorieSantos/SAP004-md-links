@@ -14,7 +14,6 @@ const readFileAt = path => {
         const links = mdString.match(regex);
 
         const linksFormated = format(links, path);
-        // console.log(linksFormatehtd)
         resolve(linksFormated);
       };
     });

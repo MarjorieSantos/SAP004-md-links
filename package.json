@@ -19,7 +19,11 @@
     "type": "git",
     "url": "git+https://github.com/MarjorieSantos/SAP004-md-links.git"
   },
-  "keywords": [],
+  "keywords": [
+    "jest",
+    "node",
+    "JavaScript"
+  ],
   "author": "Marjorie Santos",
   "license": "ISC",
   "bugs": {
