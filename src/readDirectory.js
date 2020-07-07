@@ -13,30 +13,15 @@ const readDirectory = folder => {
       files.filter(filterMdFiles).map((file) => {
         let arrayLinks = [];
         readFileAt(`${folder}/${file}`).then(linksFormated => {
-          console.log(file)
-          console.log(linksFormated)
+          if (err) {
+            reject(err)
+          } else {
+            resolve(linksFormated)
+          }
+
         });
         return Promise.all(arrayLinks)
       })
-
-
-      // .forEach((file) => {
-      //   if (err) {
-      //     reject(err)
-      //   } else {
-      //     let arrayLinks = files
-      //     return Promise.all(arrayLinks)
-      //   }
-      // })
-
-      // resolve(readFileAt(pathArchive))
-      // for (let x = 0; x < data.length; x++) {
-      //   if (path.extname(data[x]) === '.md') {
-      //     const pathArchive = `${file}/${data[x]}`;
-      //     console.log(pathArchive)
-      //     resolve(readFileAt(pathArchive))
-      //   };
-      // };
     });
   });
 };
