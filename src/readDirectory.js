@@ -18,7 +18,6 @@ const readDirectory = folder => {
           } else {
             resolve(linksFormated)
           }
-
         });
         return Promise.all(arrayLinks)
       })

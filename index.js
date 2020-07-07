@@ -1,4 +1,4 @@
-// const format = require('./src/format.js');
+const path = require('path');
 const fs = require('fs');
 const readDirectory = require('./src/readDirectory.js');
 const readFileAt = require('./src/readFileAt.js');
@@ -8,17 +8,50 @@ const mdLinks = ([path, option]) => {
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
       if (stats.isDirectory()) {
-        console.log('é pasta')
-        resolve(readDirectory(path));
+        readDirectory(path).then((linksFormated) => {
+          if (option === '--validate') {
+            const promises = [];
+            for (const link of linksFormated) {
+              promises.push(validateHTTPS(link.href));
+            }
+            return Promise.all(promises).then(results => {
+              results.forEach((status, index) => {
+                linksFormated[index].stats = status;
+              });
+              return resolve(linksFormated);
+            }).catch(err => {
+              console.log(err)
+              reject(err)
+            });
+          }
+          return resolve(linksFormated);
+        })
       } else if (stats.isFile()) {
-        console.log('é arquivo')
-        resolve(readFileAt(path));
+        readFileAt(path).then((linksFormated) => {
+          if (option === '--validate') {
+            const promises = [];
+            for (const link of linksFormated) {
+              promises.push(validateHTTPS(link.href));
+            }
+            return Promise.all(promises).then(results => {
+              results.forEach((status, index) => {
+                linksFormated[index].stats = status;
+              });
+              return resolve(linksFormated);
+            }).catch(err => {
+              console.log(err)
+              reject(err)
+            });
+          }
+          return resolve(linksFormated);
+        })
       } else {
         reject(erro);
       }
     })
   });
 };
+
 // readFileAt(path).then((linksFormated) => {
 //   if (option === '--validate') {
 //     const promises = [];
