@@ -1,10 +1,6 @@
 const fs = require('fs');
-const path = require('path');
+const filterMdFiles = require('./verify-archive.js');
 const readFileAt = require('./readFileAt.js');
-
-const filterMdFiles = (file) => {
-  return path.extname(file) === '.md';
-}
 
 const readDirectory = folder => {
   return new Promise((resolve, reject) => {

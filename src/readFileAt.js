@@ -15,6 +15,7 @@ const readFileAt = path => {
 
         const linksFormated = format(links, path);
         resolve(linksFormated);
+        console.log(linksFormated)
       };
     });
   });
