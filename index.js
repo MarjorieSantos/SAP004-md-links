@@ -14,11 +14,8 @@ const mdLinks = ([path, option]) => {
             for (const link of linksFormated) {
               promises.push(validateHTTPS(link.href));
             }
-            console.log(promises)
             return Promise.all(promises).then(results => {
               results.forEach((status, index) => {
-                console.log(index)
-                console.log(linksFormated[index].stats = status)
                 linksFormated[index].stats = status;
               });
               return resolve(linksFormated);
@@ -49,7 +46,7 @@ const mdLinks = ([path, option]) => {
           return resolve(linksFormated);
         });
       } else {
-        reject(erro);
+        reject(err);
       };
     });
   });
