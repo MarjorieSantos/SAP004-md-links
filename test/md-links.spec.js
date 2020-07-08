@@ -24,13 +24,18 @@ describe('the links are okay', () => {
         href: 'https://www.adorocinema.com/series/serie-7330/temporada-18736/',
         text: '2ª temporada'
       },
+      {
+        file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
+        href: 'https://thewalkngdead.com.br/',
+        text: 'Inválid Link'
+      },
     ]);
   });
 });
 
 
 describe('the links validateHTTPS', () => {
-  it('should be return links validated', () => {
+  it('should return the validation of the links + the message', () => {
     return expect(mdLinks(['test/mock.md', '--validate'])).resolves.toEqual([
       {
         file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
@@ -49,6 +54,12 @@ describe('the links validateHTTPS', () => {
         href: 'https://www.adorocinema.com/series/serie-7330/temporada-18736/',
         stats: 'OK 200',
         text: '2ª temporada'
+      },
+      {
+        file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
+        href: 'https://thewalkngdead.com.br/',
+        stats: 'Not Found 404',
+        text: 'Inválid Link'
       },
     ]);
   });
