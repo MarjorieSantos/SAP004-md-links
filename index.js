@@ -4,6 +4,7 @@ const readFileAt = require('./src/readFileAt.js');
 const validateHTTPS = require('./src/validateHTTPS.js');
 
 const mdLinks = ([path, option]) => {
+  console.log(option)
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
       if (stats.isDirectory()) {
@@ -13,8 +14,11 @@ const mdLinks = ([path, option]) => {
             for (const link of linksFormated) {
               promises.push(validateHTTPS(link.href));
             }
+            console.log(promises)
             return Promise.all(promises).then(results => {
               results.forEach((status, index) => {
+                console.log(index)
+                console.log(linksFormated[index].stats = status)
                 linksFormated[index].stats = status;
               });
               return resolve(linksFormated);
