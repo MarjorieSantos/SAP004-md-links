@@ -1,4 +1,5 @@
 const mdLinks = require('../index.js');
+const { test } = require('shelljs');
 
 describe('mdLinks', () => {
   it('should be a function', () => {
@@ -6,23 +7,60 @@ describe('mdLinks', () => {
   });
 });
 
-
 describe('the links are okay', () => {
-  it('should be return a link, the title of the link and the file', () => {
-    return expect(mdLinks('./mock.md')).resolves.toEqual([
-      { file: '', href: 'https://thewalkingdead.com.br/', text: 'The Walking Dead' },
-      { file: '', href: 'http://www.adorocinema.com/series/serie-7330/temporada-16736/', text: '1ª temporada' },
-      { file: '', href: 'http://www.adorocinema.com/series/serie-7330/temporada-18736/', text: '2ª temporada' },
-      { file: '', href: 'https://www.adorocinema.com/series/serie-7330/temporada-20603/', text: '3ª temporada' },
-      { file: '', href: '      https://www.adorocinema.com/series/serie-7330/temporada-22184/', text: '4ª temporada' },
+  it('should be return a link, the title of link and the file', () => {
+    return expect(mdLinks(['test/mock.md'])).resolves.toEqual([
+      {
+        file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
+        href: 'https://thewalkingdead.com.br/',
+        text: 'The Walking Dead'
+      },
+      {
+        file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
+        href: 'http://www.adorocinema.com/series/serie-7330/temporada-16736/',
+        text: '1ª temporada'
+      },
+      {
+        file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
+        href: 'https://www.adorocinema.com/series/serie-7330/temporada-18736/',
+        text: '2ª temporada'
+      },
     ]);
-  })
+  });
 });
 
 
-describe('incorrect link', () => {
-  it('should return an error if the link is incorrect', () => {
-    return expect(mdLinks('./mock.md')).rejects.toEqual('Link não encontrado')
+describe('the links validateHTTPS', () => {
+  it('should be return links validated', () => {
+    return expect(mdLinks(['test/mock.md', '--validate'])).resolves.toEqual([
+      {
+        file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
+        href: 'https://thewalkingdead.com.br/',
+        stats: 'OK 200',
+        text: 'The Walking Dead'
+      },
+      {
+        file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
+        href: 'http://www.adorocinema.com/series/serie-7330/temporada-16736/',
+        stats: 'OK 200',
+        text: '1ª temporada'
+      },
+      {
+        file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
+        href: 'https://www.adorocinema.com/series/serie-7330/temporada-18736/',
+        stats: 'OK 200',
+        text: '2ª temporada'
+      },
+    ]);
+  });
+})
+
+
+describe('error', () => {
+  it('should return an error if not found links', () => {
+    (mdLinks('test/vazio.md')).catch((err) => {
+      return expect(err).toBe('não existem links nesse arquivo!');
+    });
   });
 });
 
