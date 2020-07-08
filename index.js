@@ -4,13 +4,15 @@ const readFileAt = require('./src/readFileAt.js');
 const validateHTTPS = require('./src/validateHTTPS.js');
 
 const mdLinks = ([path, option]) => {
-  console.log(option)
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
+
       if (stats.isDirectory()) {
         readDirectory(path).then((linksFormated) => {
           if (option === '--validate') {
+
             const promises = [];
+
             for (const link of linksFormated) {
               promises.push(validateHTTPS(link.href));
             }
@@ -19,16 +21,21 @@ const mdLinks = ([path, option]) => {
                 linksFormated[index].stats = status;
               });
               return resolve(linksFormated);
-            }).catch(err => {
-              reject(err);
-            });
-          };
+            })
+              .catch(err => {
+                console.log(err)
+                reject(err)
+              });
+          }
+
           return resolve(linksFormated);
         });
       } else if (stats.isFile()) {
         readFileAt(path).then((linksFormated) => {
           if (option === '--validate') {
+
             const promises = [];
+
             for (const link of linksFormated) {
               promises.push(validateHTTPS(link.href));
             }
@@ -37,10 +44,14 @@ const mdLinks = ([path, option]) => {
                 linksFormated[index].stats = status;
               });
               return resolve(linksFormated);
-            }).catch(err => {
-              reject(err);
-            });
-          };
+            })
+
+              .catch(err => {
+                console.log(err)
+                reject(err)
+              });
+          }
+
           return resolve(linksFormated);
         });
       } else {

@@ -11,7 +11,8 @@ mdLinks(args)
     })
   })
   .catch((erro) => {
-    throw new Error(`${erro}  'não existem links nesse arquivo!'`)
+    erro = 'não existem links nesse arquivo!'
+    throw new Error(`${erro}`)
   });
 
 //https://x-team.com/blog/a-guide-to-creating-a-nodejs-command/

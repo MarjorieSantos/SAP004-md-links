@@ -8,11 +8,12 @@ const validateHTTPS = (path) => {
       if (statusCode >= 200 && statusCode <= 599) {
         const status = `${statusMessage} ${statusCode}`;
         resolve(status);
-      } else {
-        const err = 'nenhum link encontrado';
+      }
+    })
+      .catch((err) => {
+        err = 'o link demorou para carregar, por isso a requisição foi interrompida ';
         reject(err);
-      };
-    });
+      });
   });
 };
 
