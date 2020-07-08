@@ -9,14 +9,11 @@ const validateHTTPS = (path) => {
         const status = `${statusMessage} ${statusCode}`;
         resolve(status);
       } else {
-        const err = 'o link não é válido'
-        reject(err)
-      }
-    })
+        const err = 'o link não é válido';
+        reject(err);
+      };
+    });
   });
 };
-
-//validate == '--status'
-//stats == '--validate'
 
 module.exports = validateHTTPS;

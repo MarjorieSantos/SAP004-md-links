@@ -1,4 +1,3 @@
-const path = require('path');
 const fs = require('fs');
 const readDirectory = require('./src/readDirectory.js');
 const readFileAt = require('./src/readFileAt.js');
@@ -20,12 +19,12 @@ const mdLinks = ([path, option]) => {
               });
               return resolve(linksFormated);
             }).catch(err => {
-              console.log(err)
-              reject(err)
+              console.log(err);
+              reject(err);
             });
-          }
+          };
           return resolve(linksFormated);
-        })
+        });
       } else if (stats.isFile()) {
         readFileAt(path).then((linksFormated) => {
           if (option === '--validate') {
@@ -39,16 +38,16 @@ const mdLinks = ([path, option]) => {
               });
               return resolve(linksFormated);
             }).catch(err => {
-              console.log(err)
-              reject(err)
+              console.log(err);
+              reject(err);
             });
-          }
+          };
           return resolve(linksFormated);
-        })
+        });
       } else {
         reject(erro);
-      }
-    })
+      };
+    });
   });
 };
 

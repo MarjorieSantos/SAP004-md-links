@@ -1,5 +1,4 @@
 const mdLinks = require('../index.js');
-const { test } = require('shelljs');
 
 describe('mdLinks', () => {
   it('should be a function', () => {
