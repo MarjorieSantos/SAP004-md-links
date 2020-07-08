@@ -10,6 +10,3 @@
 
 * [1ª temporada](http://www.adorocinema.com/series/serie-7330/temporada-16736/)
 * [2ª temporada](https://www.adorocinema.com/series/serie-7330/temporada-18736/)
-
-
-* [Inválid Link](https://thewalkngdead.com.br/)

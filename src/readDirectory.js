@@ -11,6 +11,7 @@ const readDirectory = folder => {
     const options = 'utf-8';
     fs.readdir(folder, options, (err, files) => {
       files.filter(filterMdFiles).reduce((file) => {
+        let arrayLinks = [];
         readFileAt(`${folder}/${file}`).then(linksFormated => {
           if (err) {
             reject(err)

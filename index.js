@@ -20,7 +20,6 @@ const mdLinks = ([path, option]) => {
               });
               return resolve(linksFormated);
             }).catch(err => {
-              console.log(err);
               reject(err);
             });
           };
@@ -39,7 +38,6 @@ const mdLinks = ([path, option]) => {
               });
               return resolve(linksFormated);
             }).catch(err => {
-              console.log(err);
               reject(err);
             });
           };
