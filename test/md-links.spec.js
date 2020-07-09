@@ -57,7 +57,7 @@ test('deve retornar uma função que lê diretório', (done) => {
 });
 
 test('deve retornar um erro caso não acho um link ao ler o arquivo', (done) => {
-  readDirectory('./test').catch((err) => {
+  readDirectory('test/').catch((err) => {
     expect(err).toEqual('Link não encontrado');
     done()
   });
