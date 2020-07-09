@@ -11,7 +11,6 @@ const validateArchive = (option, content) => {
 
       return Promise.all(promises)
         .then((results) => {
-          console.log(results)
           results.forEach((status, index) => {
             content[index].stats = status;
           });
