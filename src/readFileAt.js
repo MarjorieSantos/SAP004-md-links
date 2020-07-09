@@ -11,9 +11,9 @@ const readFileAt = path => {
       } else {
         const mdString = data.toString();
         const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
-        const links = mdString.match(regex);
+        const linksWithRegex = mdString.match(regex);
 
-        const linksFormated = format(links, path);
+        const linksFormated = format(linksWithRegex, path);
         resolve(linksFormated);
         console.log(linksFormated)
       };

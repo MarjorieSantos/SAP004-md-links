@@ -2,8 +2,6 @@ const path = require("path");
 const arr = [];
 
 const format = (links, relativePath) => {
-  console.log(relativePath)
-  console.log(links)
   for (const link of links) {
     const text = link.match(/\[(.[^\]]*)\]/)[1];
     const href = link.match(/\((http.*)\)/)[1];

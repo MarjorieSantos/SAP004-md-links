@@ -9,51 +9,48 @@ const mdLinks = ([path, option]) => {
 
       if (stats.isDirectory()) {
         readDirectory(path).then((linksFormated) => {
+          console.log(path)
           if (option === '--validate') {
-
             const promises = [];
-
             for (const link of linksFormated) {
               promises.push(validateHTTPS(link.href));
             }
+
             return Promise.all(promises).then(results => {
               results.forEach((status, index) => {
+
                 linksFormated[index].stats = status;
               });
               return resolve(linksFormated);
-            })
-              .catch(err => {
-                console.log(err)
-                reject(err)
-              });
+            }).catch(err => {
+              reject(err)
+            });
           }
-
           return resolve(linksFormated);
         });
       } else if (stats.isFile()) {
         readFileAt(path).then((linksFormated) => {
           if (option === '--validate') {
-
             const promises = [];
-
             for (const link of linksFormated) {
               promises.push(validateHTTPS(link.href));
             }
+
             return Promise.all(promises).then(results => {
               results.forEach((status, index) => {
                 linksFormated[index].stats = status;
               });
               return resolve(linksFormated);
-            })
-
-              .catch(err => {
-                console.log(err)
-                reject(err)
-              });
+            }).catch(err => {
+              reject(err)
+            });
           }
-
           return resolve(linksFormated);
+
+        }).catch((err) => {
+          reject(err);
         });
+
       } else {
         reject(err);
       };

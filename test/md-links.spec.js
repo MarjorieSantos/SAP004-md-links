@@ -1,6 +1,5 @@
 const mdLinks = require('../index.js');
 const validateHTTP = require('../src/validateHTTPS.js');
-const format = require('../src/format.js');
 const readFileAt = require('../src/readFileAt.js');
 const readDirectory = require('../src/readDirectory.js');
 const filterMdFiles = require('../src/verify-archive.js');
@@ -46,101 +45,61 @@ const arrayLinksFormatedWithValidate = [
 ]
 
 describe('é um arquivo md', () => {
-  it('should be a function', () => {
+  it('se for um arquivo md, deve retornar true', () => {
     expect(filterMdFiles('test/mock.md')).toBe(true);
   });
 });
 
 
 //readDirectory
-
 describe('mdLinks', () => {
-  test('should be a function', (done) => {
+  test('deve retornar uma função', (done) => {
     readDirectory('./test').then((linksFormated) => {
-      return expect(linksFormated).toEqual(arrayLinksFormated);
+      expect(linksFormated).toEqual(arrayLinksFormated);
+      done()
     });
-    done()
   });
 })
 
-
-
-//readFile
 describe('error', () => {
-  test('should return an error if not found links', (done) => {
-    (readFileAt('test/notFound.md')).catch((err) => {
-      expect(err).toBe('Link não encontrado');
+  test('deve retornar um erro cajo não haja links no arquivo', (done) => {
+    readFileAt('test/notFound.md').catch((err) => {
+      expect(err).toEqual('Link não encontrado');
+      done()
     });
-    done()
   });
 });
 
 
-
-//format
-const arrayTest = [
-  '[The Walking Dead](https://thewalkingdead.com.br/)',
-  '[10ª temporada - Trailer](https://www.youtube.com/watch?v=DHQzM5Ee4cw)',
-  '[2ª temporada - abertura](https://www.youtube.com/watch?v=of-Bqmlgj98)'
-]
-
-describe('format', () => {
-  it('should be a function', () => {
-    expect(format(arrayTest, 'test/mock.md')).toEqual(arrayLinksFormated);
-  });
-});
-
-
-//validateHTTP
-describe('the links validateHTTPS', () => {
-  it('should return the validation of the links + the message', () => {
-    (validateHTTP(['test/mock.md'])).then((result) => {
-      expect(result).toEqual(arrayLinksFormatedWithValidate)
+describe('status code HTTP error', () => {
+  it('deve retornar uma mensagem de erro se o link demorar a carregar', () => {
+    validateHTTP(['test/mock.md']).catch((err) => {
+      expect(err).toEqual('o link demorou para carregar, por isso a requisição foi interrompida ')
     })
   });
 })
-
 
 
 //mdLinks
-
 describe('mdLinks', () => {
-  it('should be a function', () => {
+  test('deve retornar uma função', (done) => {
     expect(typeof mdLinks).toBe('function');
+    done()
   });
 });
 
-test('the links are okay', (done) => {
-  (mdLinks(['test/mock.md'])).then((result) => {
+test('deve retornar o texto, o link e o arquivo', (done) => {
+  mdLinks(['test/mock.md']).then((result) => {
     expect(result).toEqual(arrayLinksFormated);
+    done()
   });
-  done()
 })
 
-describe('the links validateHTTPS', () => {
-  test('should return the validation of the links + the message', (done) => {
-    (mdLinks(['test/', '--validate'])).then((result) => {
-      expect(result).toEqual(arrayLinksFormatedWithValidate)
+describe('the links validateHTTPS FILE', () => {
+  test('deve retornar o texto, o link, o arquivo + VALIDAÇÃO', (done) => {
+    mdLinks(['/test/mock.md', '--validate']).then((linksFormated) => {
+      expect(linksFormated).toEqual(arrayLinksFormatedWithValidate)
+      done()
     })
-    done()
   });
 })
-
-describe('the links validateHTTPS', () => {
-  test('should return the validation of the links + the message', (done) => {
-    (mdLinks(['test/mock.md', '--validate'])).then((result) => {
-      expect(result).toEqual(arrayLinksFormatedWithValidate)
-    })
-    done()
-  });
-})
-
-describe('error', () => {
-  test('should return an error if not found links', (done) => {
-    (mdLinks('test/vazio.md')).catch((err) => {
-      expect(err).toBe('não existem links nesse arquivo!');
-    });
-    done()
-  });
-});
-
