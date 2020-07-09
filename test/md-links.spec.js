@@ -44,62 +44,78 @@ const arrayLinksFormatedWithValidate = [
   },
 ]
 
-describe('é um arquivo md', () => {
-  it('se for um arquivo md, deve retornar true', () => {
-    expect(filterMdFiles('test/mock.md')).toBe(true);
-  });
+it('deve retornar true se for um arquivo com extensão md', () => {
+  expect(filterMdFiles('test/mock.md')).toBe(true);
 });
-
 
 //readDirectory
-describe('mdLinks', () => {
-  test('deve retornar uma função', (done) => {
-    readDirectory('./test').then((linksFormated) => {
-      expect(linksFormated).toEqual(arrayLinksFormated);
-      done()
-    });
-  });
-})
-
-describe('error', () => {
-  test('deve retornar um erro cajo não haja links no arquivo', (done) => {
-    readFileAt('test/notFound.md').catch((err) => {
-      expect(err).toEqual('Link não encontrado');
-      done()
-    });
-  });
-});
-
-
-describe('status code HTTP error', () => {
-  it('deve retornar uma mensagem de erro se o link demorar a carregar', () => {
-    validateHTTP(['test/mock.md']).catch((err) => {
-      expect(err).toEqual('o link demorou para carregar, por isso a requisição foi interrompida ')
-    })
-  });
-})
-
-
-//mdLinks
-describe('mdLinks', () => {
-  test('deve retornar uma função', (done) => {
-    expect(typeof mdLinks).toBe('function');
+test('deve retornar uma função que lê diretório', (done) => {
+  readDirectory('./test').then((linksFormated) => {
+    expect(linksFormated).toEqual(arrayLinksFormated);
     done()
   });
 });
 
-test('deve retornar o texto, o link e o arquivo', (done) => {
+test('deve retornar um erro caso não acho um link ao ler o arquivo', (done) => {
+  readDirectory('./test').catch((err) => {
+    expect(err).toEqual('Link não encontrado');
+    done()
+  });
+});
+
+
+//readFile
+test('deve retornar um erro cajo não haja links no arquivo', (done) => {
+  readFileAt('test/notFound.md').catch((err) => {
+    expect(err).toEqual('Link não encontrado');
+    done()
+  });
+});
+
+
+
+//validate HTTP
+it('deve retornar uma mensagem de erro se o link demorar a carregar', () => {
+  validateHTTP(['test/mock.md']).catch((err) => {
+    expect(err).toEqual('o link demorou para carregar, por isso a requisição foi interrompida ')
+  })
+});
+
+
+
+//mdLinks
+test('deve retornar uma função', (done) => {
+  expect(typeof mdLinks).toBe('function');
+  done()
+});
+
+
+test('deve retornar o texto, o link e o local do ARQUIVO', (done) => {
   mdLinks(['test/mock.md']).then((result) => {
     expect(result).toEqual(arrayLinksFormated);
     done()
   });
 })
 
-describe('the links validateHTTPS FILE', () => {
-  test('deve retornar o texto, o link, o arquivo + VALIDAÇÃO', (done) => {
-    mdLinks(['/test/mock.md', '--validate']).then((linksFormated) => {
-      expect(linksFormated).toEqual(arrayLinksFormatedWithValidate)
-      done()
-    })
+test('deve retornar o texto, o link, o arquivo + validação do ARQUIVO', (done) => {
+  mdLinks(['test/mock.md', '--validate']).then((linksFormated) => {
+    expect(linksFormated).toEqual(arrayLinksFormatedWithValidate)
+    done()
+  })
+});
+
+
+test('deve retornar o texto, o link e o local do DIRETÓRIO', (done) => {
+  mdLinks(['test/']).then((result) => {
+    expect(result).toEqual(arrayLinksFormated);
+    done()
   });
 })
+
+test('deve retornar o texto, o link, o arquivo + validação do DIRETÓRIO', (done) => {
+  mdLinks(['test/', '--validate']).then((linksFormated) => {
+    expect(linksFormated).toEqual(arrayLinksFormatedWithValidate)
+    done()
+  })
+});
+
