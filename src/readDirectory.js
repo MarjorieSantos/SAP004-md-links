@@ -10,6 +10,7 @@ const readDirectory = folder => {
         let arrayLinks = [];
         readFileAt(`${folder}/${file}`).then(linksFormated => {
           if (err) {
+            err = 'Link não encontrado';
             reject(err)
           } else {
             resolve(linksFormated)

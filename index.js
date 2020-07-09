@@ -6,12 +6,14 @@ const validateHTTPS = require('./src/validateHTTPS.js');
 const mdLinks = ([path, option]) => {
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
-
-      if (stats.isDirectory()) {
+      if (err) {
+        err = 'Nenhum link foi encontrado ou a requisição não foi completada!'
+      } else if (stats.isDirectory()) {
         readDirectory(path).then((linksFormated) => {
-          console.log(path)
           if (option === '--validate') {
+
             const promises = [];
+
             for (const link of linksFormated) {
               promises.push(validateHTTPS(link.href));
             }
@@ -22,9 +24,7 @@ const mdLinks = ([path, option]) => {
                 linksFormated[index].stats = status;
               });
               return resolve(linksFormated);
-            }).catch(err => {
-              reject(err)
-            });
+            })
           }
           return resolve(linksFormated);
         });
@@ -41,19 +41,14 @@ const mdLinks = ([path, option]) => {
                 linksFormated[index].stats = status;
               });
               return resolve(linksFormated);
-            }).catch(err => {
-              reject(err)
-            });
+            })
           }
           return resolve(linksFormated);
 
         }).catch((err) => {
           reject(err);
         });
-
-      } else {
-        reject(err);
-      };
+      }
     });
   });
 };

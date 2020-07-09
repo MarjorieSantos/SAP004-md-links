@@ -15,7 +15,6 @@ const readFileAt = path => {
 
         const linksFormated = format(linksWithRegex, path);
         resolve(linksFormated);
-        console.log(linksFormated)
       };
     });
   });
