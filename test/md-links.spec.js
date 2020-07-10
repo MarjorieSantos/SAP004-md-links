@@ -1,6 +1,5 @@
 const mdLinks = require('../index.js');
 const validateHTTP = require('../src/validateHTTPS.js');
-const validateArchive = require('../src/validateArchiveSelect.js')
 const readFileAt = require('../src/readFileAt.js');
 const readDirectory = require('../src/readDirectory.js');
 const filterMdFiles = require('../src/verify-archive.js');
@@ -73,7 +72,6 @@ it('deve retornar uma mensagem de erro se o link demorar a carregar', () => {
     expect(err).toEqual('o link demorou para carregar, por isso a requisição foi interrompida ')
   })
 });
-
 
 
 //mdLinks
