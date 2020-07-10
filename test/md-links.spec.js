@@ -1,5 +1,6 @@
 const mdLinks = require('../index.js');
 const validateHTTP = require('../src/validateHTTPS.js');
+const validateArchive = require('../src/validateArchiveSelect.js')
 const readFileAt = require('../src/readFileAt.js');
 const readDirectory = require('../src/readDirectory.js');
 const filterMdFiles = require('../src/verify-archive.js');
@@ -56,13 +57,6 @@ test('deve retornar uos links formatados ao ler um diretório com uma arquivo md
   });
 });
 
-// test('deve retornar um erro caso não acho um link ao ler o arquivo', (done) => {
-//   readDirectory('test/').catch((err) => {
-//     expect(err).toEqual('Link não encontrado');
-//     done()
-//   });
-// });
-
 
 //readFile
 test('deve retornar um erro cajo não haja links no arquivo', (done) => {
@@ -71,7 +65,6 @@ test('deve retornar um erro cajo não haja links no arquivo', (done) => {
     done()
   });
 });
-
 
 
 //validate HTTP
@@ -91,39 +84,23 @@ test('deve retornar uma função', (done) => {
 
 
 test('deve retornar o texto, o link e o local do ARQUIVO', (done) => {
-  mdLinks(['test/mock.md']).then((result) => {
-    expect(result).toEqual(arrayLinksFormated);
+  mdLinks(['test/mock.js']).catch((err) => {
+    expect(err).toEqual("não existem links nesse arquivo!");
     done()
   });
 })
 
-// test('deve retornar o texto, o link, o arquivo + validação do ARQUIVO', (done) => {
-//   mdLinks(['test/mock.md', '--validate']).then((linksFormated) => {
-//     expect(linksFormated).toEqual(arrayLinksFormatedWithValidate)
-//     done()
-//   })
-// });
-
-
-test('deve retornar o texto, o link e o local do DIRETÓRIO', (done) => {
-  mdLinks(['test/mock.md']).then((result) => {
-    expect(result).toEqual(arrayLinksFormated);
+test('deve retornar um erro se não houver links', (done) => {
+  mdLinks(['vazio.md']).catch((err) => {
+    expect(err).toEqual('não existem links nesse arquivo!');
     done()
   });
 })
 
-
-test('deve retornar o texto, o link e o local do DIRETÓRIO', (done) => {
-  mdLinks(['test/mock.js']).catch((result) => {
-    expect(result).toEqual(arrayLinksFormated);
+test('deve retornar o texto, o link, o arquivo + validação do DIRETÓRIO', (done) => {
+  mdLinks(['./test/', '--validate']).then((linksFormated) => {
+    expect(linksFormated).toEqual(arrayLinksFormatedWithValidate)
     done()
-  });
-})
-
-// test('deve retornar o texto, o link, o arquivo + validação do DIRETÓRIO', (done) => {
-//   mdLinks(['test/', '--validate']).then((linksFormated) => {
-//     expect(linksFormated).toEqual(arrayLinksFormatedWithValidate)
-//     done()
-//   })
-// });
+  })
+});
 

@@ -11,7 +11,6 @@ const readFileAt = path => {
         reject(err);
       } else {
         if (filterMdLinks(path) !== 'não é um arquivo md') {
-          console.log(path)
           const mdString = data.toString();
           const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
           const linksWithRegex = mdString.match(regex);

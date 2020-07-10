@@ -8,6 +8,7 @@ const mdLinks = ([path, option]) => {
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
       if (err) {
+        err = 'não existem links nesse arquivo!';
         reject(err)
       } else if (stats.isDirectory()) {
         readDirectory(path).then((linksFormated) => {
@@ -16,7 +17,7 @@ const mdLinks = ([path, option]) => {
           })
         })
           .catch((err) => {
-            err = 'Nenhum link foi encontrado ou a requisição não foi completada!'
+            err = 'não existem links nesse arquivo!'
             reject(err)
           })
       } else if (stats.isFile()) {
@@ -25,7 +26,7 @@ const mdLinks = ([path, option]) => {
             return resolve(content);
           })
         }).catch((err) => {
-          err = 'Nenhum link foi encontrado ou a requisição não foi completada!'
+          err = 'não existem links nesse arquivo!'
           reject(err)
         })
       }
