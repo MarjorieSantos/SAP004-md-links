@@ -6,18 +6,12 @@ const readDirectory = folder => {
   return new Promise((resolve, reject) => {
     const options = 'utf-8';
     fs.readdir(folder, options, (err, files) => {
-      files.filter(filterMdFiles).reduce((file) => {
-        let arrayLinks = [];
-        readFileAt(`${folder}/${file}`).then(linksFormated => {
-          if (err) {
-            err = 'Link não encontrado';
-            reject(err)
-          } else {
-            resolve(linksFormated)
-          }
-        });
-        return Promise.all(arrayLinks)
-      })
+      for (let x = 0; x < files.length; x++) {
+        if (filterMdFiles(files[x]) !== 'não é um arquivo md') {
+          return resolve(readFileAt(`${folder}/${files[x]}`))
+        }
+      }
+      return reject(err)
     });
   });
 };

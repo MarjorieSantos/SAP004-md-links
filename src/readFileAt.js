@@ -1,5 +1,6 @@
 const fs = require('fs');
 const format = require('./format.js');
+const filterMdLinks = require('./verify-archive.js');
 
 const readFileAt = path => {
   return new Promise((resolve, reject) => {
@@ -9,12 +10,17 @@ const readFileAt = path => {
         err = 'Link não encontrado';
         reject(err);
       } else {
-        const mdString = data.toString();
-        const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
-        const linksWithRegex = mdString.match(regex);
+        if (filterMdLinks(path) !== 'não é um arquivo md') {
+          console.log(path)
+          const mdString = data.toString();
+          const regex = /\[(.[^\]]*)\]\((http.*)\)/gm;
+          const linksWithRegex = mdString.match(regex);
 
-        const linksFormated = format(linksWithRegex, path);
-        resolve(linksFormated);
+          const linksFormated = format(linksWithRegex, path);
+          return resolve(linksFormated);
+        } else {
+          return reject(err);
+        }
       };
     });
   });

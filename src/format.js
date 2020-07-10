@@ -3,6 +3,8 @@ const arr = [];
 
 const format = (links, relativePath) => {
   for (const link of links) {
+    console.log(links)
+    console.log(link)
     const text = link.match(/\[(.[^\]]*)\]/)[1];
     const href = link.match(/\((http.*)\)/)[1];
     const file = path.resolve(relativePath.replace('[]', ''));

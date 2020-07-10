@@ -8,7 +8,6 @@ const mdLinks = ([path, option]) => {
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
       if (err) {
-        err = 'Nenhum link foi encontrado ou a requisição não foi completada!'
         reject(err)
       } else if (stats.isDirectory()) {
         readDirectory(path).then((linksFormated) => {
