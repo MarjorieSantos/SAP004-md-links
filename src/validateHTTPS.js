@@ -9,7 +9,7 @@ const validateHTTPS = (path) => {
       resolve(status);
     })
       .catch((err) => {
-        err = 'o link demorou para carregar, por isso a requisição foi interrompida ';
+        err = 'desculpe, não foi possível validar o link';
         reject(err);
       });
   });

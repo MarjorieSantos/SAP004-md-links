@@ -7,7 +7,7 @@ const readFileAt = path => {
     const options = 'utf-8';
     fs.readFile(path, options, (err, data) => {
       if (err) {
-        err = 'Link não encontrado';
+        err = 'infelizmente não foi possível ler o arquivo';
         reject(err);
       } else {
         if (filterMdLinks(path) !== 'não é um arquivo md') {

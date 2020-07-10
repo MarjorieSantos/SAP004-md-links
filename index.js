@@ -8,7 +8,7 @@ const mdLinks = ([path, option]) => {
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
       if (err) {
-        err = 'não existem links nesse arquivo!';
+        err = 'não foi possível ler o arquivo/diretório';
         reject(err)
       } else if (stats.isDirectory()) {
         readDirectory(path).then((linksFormated) => {
@@ -17,16 +17,17 @@ const mdLinks = ([path, option]) => {
           })
         })
           .catch((err) => {
-            err = 'não existem links nesse arquivo!'
+            err = 'não foi possível ler o arquivo/diretório'
             reject(err)
           })
       } else if (stats.isFile()) {
         readFileAt(path).then((linksFormated) => {
           validateArchive(option, linksFormated).then((content) => {
+            console.log(content)
             return resolve(content);
           })
         }).catch((err) => {
-          err = 'não existem links nesse arquivo!'
+          err = 'não foi possível ler o arquivo/diretório'
           reject(err)
         })
       }

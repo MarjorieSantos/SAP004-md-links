@@ -11,7 +11,7 @@ mdLinks(args)
     })
   })
   .catch((erro) => {
-    erro = 'não existem links nesse arquivo!'
+    erro = 'não foi possível ler o arquivo/diretório'
     console.log(erro)
   });
 
