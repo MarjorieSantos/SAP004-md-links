@@ -5,9 +5,6 @@ const readDirectory = require('../src/readDirectory.js');
 const filterMdFiles = require('../src/verify-archive.js');
 const validateArchive = require('../src/validateArchiveSelect.js');
 
-
-const arrayVazio = [];
-
 const arrayLinksFormated = [
   {
     file: 'C:\\Users\\Marjorie\\Documents\\repositorios\\SAP004-md-links\\test\\mock.md',
@@ -59,15 +56,6 @@ test('deve retornar uos links formatados ao ler um diretório com uma arquivo md
   });
 });
 
-
-//readFile
-test('deve retornar um erro caso não haja links no arquivo', (done) => {
-  readFileAt('test/vazio.md').catch((err) => {
-    expect(err).toEqual('infelizmente não foi possível ler o arquivo');
-    done()
-  });
-});
-
 //validate HTTP
 it('deve retornar uma mensagem caso não consiga validar o link', () => {
   validateHTTP(['test/mock.md']).catch((err) => {
@@ -103,10 +91,3 @@ test('deve retornar um erro se não houver links', (done) => {
     done()
   });
 })
-
-test('deve retornar o texto, o link, o arquivo', (done) => {
-  mdLinks(['test/', '--validate']).then((linksFormated) => {
-    expect(linksFormated).toEqual(arrayLinksFormatedWithValidate)
-    done()
-  })
-});

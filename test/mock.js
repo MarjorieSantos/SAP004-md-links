@@ -36,3 +36,7 @@ const arrayLinksFormatedWithValidate = [
     text: '2ª temporada - abertura'
   },
 ]
+
+module.exports = {
+  arrayLinksFormated, arrayLinksFormatedWithValidate
+};

@@ -12,6 +12,7 @@ const mdLinks = ([path, option]) => {
         reject(err)
       } else if (stats.isDirectory()) {
         readDirectory(path).then((linksFormated) => {
+          console.log(path)
           validateArchive(option, linksFormated).then((content) => {
             return resolve(content);
           })
