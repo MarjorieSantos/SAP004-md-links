@@ -1,17 +1,17 @@
 const path = require("path");
-const arr = [];
+
+const matchers = {
+  regexLinks: /\((http.*)\)/,
+  regexText: /\[(.[^\]]*)\]/,
+}
 
 const format = (links, relativePath) => {
-  for (const link of links) {
-    const text = link.match(/\[(.[^\]]*)\]/)[1];
-    const href = link.match(/\((http.*)\)/)[1];
+  return links.map((link) => {
+    const text = link.match(matchers.regexText)[1];
+    const href = link.match(matchers.regexLinks)[1];
     const file = path.resolve(relativePath.replace('[]', ''));
-    arr.push({ href, text, file });
-  };
-  return arr;
+    return { href, text, file };
+  })
 };
 
 module.exports = format;
-
-
-//=> match  : [1], para retornar a segunda(indice2) do array que estava sendo retornado, com index, input, groups, etc. pegando assim apenas o link certinho

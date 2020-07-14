@@ -14,5 +14,3 @@ mdLinks(args)
     erro = 'não foi possível ler o arquivo/diretório'
     console.log(erro)
   });
-
-//https://x-team.com/blog/a-guide-to-creating-a-nodejs-command/
